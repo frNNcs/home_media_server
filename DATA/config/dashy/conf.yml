@@ -1,0 +1,48 @@
+---
+pageInfo:
+  title: Home Media Server
+  description: Welcome to your Home Media Server
+
+appConfig:
+  theme: catppuccin-mocha
+  cssThemes: ['catppuccin-mocha']
+  layout: grid
+  grid:
+    columns: 3
+    rows: 3
+    sections:
+      - name: Getting Started
+        items: 6
+
+sections:
+  - name: Media
+    items:
+      - title: Plex
+        icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Plex/icon.png
+        url: http://localhost:32400/web/index.html
+        target: newtab
+
+      - title: Jackett
+        icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Jackett/icon.png
+        url: http://localhost:9117
+        target: newtab
+
+      - title: Transmission
+        icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Transmission/icon.png
+        url: http://localhost:9091
+        target: newtab
+
+      - title: Radarr
+        icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Radarr/icon.png
+        url: http://localhost:7878
+        target: newtab
+
+      - title: Sonarr
+        icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Sonarr/icon.png
+        url: http://localhost:8989
+        target: newtab
+
+      - title: Overseerr
+        icon: https://cdn.jsdelivr.net/gh/IceWhaleTech/CasaOS-AppStore@main/Apps/Overseerr/icon.png
+        url: http://localhost:5055
+        target: newtab
