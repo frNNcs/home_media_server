@@ -1,0 +1,112 @@
+services:
+  transmission:
+    container_name: transmission
+    image: lscr.io/linuxserver/transmission:latest
+    env_file:
+      - path: .env
+        required: true
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - USER=${TRANSMISSION_USERNAME}
+      - PASS=${TRANSMISSION_PASSWORD}
+    volumes:
+      - ./Data/config/transmission:/config
+      - ./Data/downloads:/downloads
+    ports:
+      - 9091:9091
+    restart: unless-stopped
+
+  jackett:
+    container_name: jackett
+    image: lscr.io/linuxserver/jackett:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - AUTO_UPDATE=true
+    ports:
+      - 9117:9117
+    volumes:
+      - ./DATA/config/jackett:/config/Jackett
+      - ./Data/downloads:/downloads
+    restart: unless-stopped
+
+  radarr:
+    container_name: radarr
+    image: lscr.io/linuxserver/radarr:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ./Data/config/radarr:/config
+      - ./Data/movies:/movies
+      - ./DATA/downloads:/downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
+  sonarr:
+    container_name: sonarr
+    image: lscr.io/linuxserver/sonarr:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ./DATA/config/sonarr:/config
+      - ./DATA/tv:/tv
+      - ./DATA/downloads:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  plex:
+    container_name: plex
+    image: lscr.io/linuxserver/plex:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+      - VERSION=docker
+      - PLEX_CLAIM=claim-d1KsGC1KsGC1KsGCk # https://plex.tv/claim
+    ports:
+      - "32400:32400"
+      - "1900:1900/udp"
+      - "8324:8324"
+      - "32469:32469"
+
+    volumes:
+      - ./DATA/config/plex:/config/
+      - ./Data/movies:/movies
+      - ./DATA/tv:/tv
+    restart: unless-stopped
+
+  overseerr:
+    container_name: overseerr
+    image: lscr.io/linuxserver/overseerr:latest
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TIMEZONE}
+    volumes:
+      - ./DATA/config/overseerr:/config
+    ports:
+      - 5055:5055
+    restart: unless-stopped
+
+  dashy:
+    image: lissy93/dashy:latest
+    container_name: Dashy
+    volumes:
+      - ./DATA/config/dashy/conf.yml:/app/user-data/conf.yml
+      - ./DATA/config/dashy/catppuccin.scss:/app/src/styles/user-defined-themes.scss
+    ports:
+      - 4000:8080
+    environment:
+      - NODE_ENV=production
+      - UID=1000
+      - GID=1000
+    restart: unless-stopped

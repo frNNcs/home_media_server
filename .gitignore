@@ -1,0 +1,10 @@
+.env
+downloads/*
+tv/*
+movies/*
+config/jackett/*
+config/overseerr/*
+config/plex/*
+config/radarr/*
+config/sonarr/*
+config/transmission/*
